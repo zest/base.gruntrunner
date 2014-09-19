@@ -1,1 +1,1 @@
-module.exports = require('base.gruntrunner');
+module.exports = require('./lib');
