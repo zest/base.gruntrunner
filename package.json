@@ -1,61 +1,48 @@
 {
-  "name": "base.gruntrunner",
-  "description": "TODO",
-  "version": "0.0.1",
-  "main": "./lib/index",
-  "private": true,
-  "scripts": {
-    "coverage": "grunt coverage",
-    "cleanup": "grunt cleanup",
-    "init": "grunt init",
-    "test": "grunt test",
-    "document": "grunt document",
-    "observe": "grunt observe"
-  },
-  "maintainers": [
-    {
-      "name": "Pranav Jha",
-      "email": "jha.pranav.s@gmail.com",
-      "web": "https://github.com/zest"
+    "name": "base.gruntrunner",
+    "description": "base.gruntrunner is a convenience module for adding grunt tasks to soul components",
+    "version": "0.0.1",
+    "main": "./lib/index",
+    "private": true,
+    "scripts": {
+        "test": "./node_modules/.bin/grunt test"
+    },
+    "license": "Unlicense",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zest/base.gruntrunner.git"
+    },
+    "bugs": {
+        "url": "https://github.com/zest/base.gruntrunner/issues"
+    },
+    "maintainers": [
+        {
+            "name": "Pranav Jha",
+            "email": "jha.pranav.s@gmail.com",
+            "url": "http://about.me/pranavjha"
+        }
+    ],
+    "dependencies": {
+        "grunt-contrib-clean": "0.6.0",
+        "grunt-contrib-watch": "0.6.1",
+        "grunt-contrib-jshint": "0.10.0",
+        "ink-docstrap": "0.4.12",
+        "grunt-jsdoc": "0.5.7",
+        "grunt-mocha-cov": "0.3.0",
+        "mocha-term-cov-reporter": "0.2.0",
+        "grunt-gh-pages": "0.9.1",
+        "merge": "1.2.0"
+    },
+    "devDependencies": {
+        "grunt": "0.4.5",
+        "grunt-cli": "0.1.13"
+    },
+    "directories": {
+        "lib": "lib"
+    },
+    "config": {
+        "blanket": {
+            "pattern": "//^(?!.*/node_modules/).*/lib/"
+        }
     }
-  ],
-  "licenses": [
-    {
-      "type": "unlicense",
-      "url": "http://unlicense.org"
-    }
-  ],
-  "repositories": [
-    {
-      "type": "git",
-      "url": "https://github.com/zest/base.gruntrunner.git"
-    }
-  ],
-  "dependencies": {
-    "grunt": "0.4.5",
-    "grunt-contrib-clean": "0.6.0",
-    "grunt-contrib-watch": "0.6.1",
-    "grunt-contrib-jshint": "0.10.0",
-    "ink-docstrap": "0.4.12",
-    "grunt-jsdoc": "0.5.7",
-    "grunt-mocha-cov": "0.3.0",
-    "mocha-term-cov-reporter": "0.2.0",
-    "grunt-gh-pages": "0.9.1",
-    "merge": "1.2.0"
-  },
-  "directories": {
-    "lib": "lib",
-    "test": "test",
-    "out": ".out"
-  },
-  "config": {
-    "blanket": {
-      "pattern": "//^(?!.*/node_modules/).*/lib/"
-    }
-  },
-  "soul-component": "filestore",
-  "devDependencies": {
-    "merge": "~1.2.0",
-    "grunt-gh-pages": "~0.9.1"
-  }
 }
