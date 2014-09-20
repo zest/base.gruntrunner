@@ -4,5 +4,5 @@ node_js:
   - "0.11"
 after_script:
     # run the coverage task and push the coverage report to coveralls
-  - "./node_modules/.bin/grunt coverage"
+  - "./node_modules/.bin/grunt coveralls"
   - "./node_modules/.bin/grunt document gh-pages"

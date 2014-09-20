@@ -33,12 +33,18 @@ The grunt runner defines the following general tasks into the grunt file.
     
   - `observe`
   
-    The observe task is used mainly for development. It is also the default grunt task. This task will watch for file changes and run jshint validations and test cases everytime any relevant file changes. `observe` has two variants:
+    The observe task is used mainly for development. It is also the default grunt task. This task will watch for file 
+    changes and run jshint validations and test cases everytime any relevant file changes. `observe` has two variants:
     
-      - `GRUNT OBSERVE`
+      - `grunt observe` or `grunt` will observe file changes for code quality and tests
+      - `grunt observe --docs` or `grunt --docs` will observe file changes for jsdoc documentation
   
   - `coveralls`
-
+    The coveralls task is used to submit coverage report to coveralls. This task will only run successfully from 
+    **travis-ci**.
+  
+  - `gh-pages`
+    
 
 ## assumptions
 
