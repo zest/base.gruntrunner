@@ -254,6 +254,10 @@ h6 {
     margin-top: 1em;
 }
 
+.description p{
+    margin: 0;
+}
+
 .code-caption {
     font-style: italic;
     font-size: 107%;
