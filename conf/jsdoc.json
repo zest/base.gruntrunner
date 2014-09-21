@@ -4,5 +4,20 @@
     ],
     "markdown": {
         "parser": "gfm"
+    },
+    "templates": {
+        "systemName": "zest",
+        "footerlinks": {
+            "base.resolver": "http://zest.github.io/base.resolver/",
+            "base.resolver-cli": "http://zest.github.io/base.resolver-cli/",
+            "base.logger": "http://zest.github.io/base.logger/",
+            "base.gruntrunner": "http://zest.github.io/base.gruntrunner/",
+            "datastore.mongo": "http://zest.github.io/datastore.mongo/",
+            "filestore.disk": "http://zest.github.io/filestore.disk/",
+            "privilege.datastore": "http://zest.github.io/privilege.datastore/",
+            "user.datastore": "http://zest.github.io/user.datastore/",
+            "application.rest": "http://zest.github.io/application.rest/",
+            "integration.embodier": "http://zest.github.io/integration.embodier/"
+        }
     }
 }
