@@ -1,6 +1,6 @@
 {
     "name": "base.gruntrunner",
-    "description": "base.gruntrunner is a convenience module for adding grunt tasks to soul components",
+    "description": "base.gruntrunner is a convenience module for adding grunt tasks to zest components",
     "version": "0.0.1",
     "main": "./lib/index",
     "private": true,

@@ -10,7 +10,7 @@
 
 # zest / base.gruntrunner
 
-> base.gruntrunner is a convenience module for adding grunt tasks to soul components.
+> base.gruntrunner is a convenience module for adding grunt tasks to zest components.
 
 ## general tasks
 
