@@ -120,7 +120,7 @@ function generate(title, docs, filename, resolveLinks) {
         return '<a href="'+env.conf.templates.footerlinks[key]+'">'+key+'</a> ';
     }).join(' | ');
     var docData = {
-        systemName: env.conf.templates.systemName,
+        component: env.conf.templates.component,
         title: title,
         footer: footer,
         docs: docs
@@ -200,7 +200,7 @@ function attachModuleSymbols(doclets, modules) {
  * @return {string} The HTML for the navigation sidebar.
  */
 function buildNav(members) {
-    var nav = '<h2><a href="index.html">Index</a></h2>',
+    var nav = '<h2><a href="index.html">' + env.conf.templates.component + '</a></h2>',
         seen = {},
         hasClassList = false,
         classNav = '',

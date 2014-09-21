@@ -6,7 +6,6 @@
         "parser": "gfm"
     },
     "templates": {
-        "systemName": "zest",
         "footerlinks": {
             "base.resolver": "http://zest.github.io/base.resolver/",
             "base.resolver-cli": "http://zest.github.io/base.resolver-cli/",
