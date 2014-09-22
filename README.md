@@ -4,7 +4,6 @@
 
 [![Quality][quality-image]][quality-link]
 [![Build Status][build-status-image]][build-status-link]
-[![Coverage Status][coverage-status-image]][coverage-status-link]
 [![License][license-image]][license-link]
 
 
@@ -74,5 +73,3 @@ TODO
 [quality-link]: https://codeclimate.com/github/zest/base.gruntrunner
 [build-status-image]: http://img.shields.io/travis/zest/base.gruntrunner.svg?style=flat-square
 [build-status-link]: https://travis-ci.org/zest/base.gruntrunner
-[coverage-status-image]: http://img.shields.io/coveralls/zest/base.gruntrunner.svg?style=flat-square
-[coverage-status-link]: https://coveralls.io/r/zest/base.gruntrunner
