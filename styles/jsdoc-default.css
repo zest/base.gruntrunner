@@ -261,6 +261,12 @@ dd > .description {
     margin-top: 1em;
 }
 
+.description > ul {
+    list-style: square;
+    padding: 0;
+    margin: 10px;
+}
+
 .description p {
     margin: 0;
 }
