@@ -33,6 +33,7 @@ a:active {
 strong {
     font-weight: 400;
 }
+
 header {
     display: block;
     padding: 6px 4px;
@@ -57,7 +58,6 @@ section {
     max-width: 850px;
     margin: auto;
 }
-
 
 .class-description {
     font-style: italic;
@@ -89,7 +89,8 @@ nav {
     padding: 10px;
     overflow: auto;
     width: 230px;
-    background: #ffecdf;
+    background: #FFFFFF;
+    font-weight: 400;
 }
 
 nav ul {
@@ -103,12 +104,14 @@ nav ul {
 nav h2 a, nav h2 a:visited {
     color: #A35A00;
     text-decoration: none;
+    font-weight: 300;
 }
 
 nav h3 {
     margin-top: 12px;
     border-top: 1px solid #e66000;
     padding-top: 12px;
+    font-weight: 300;
 }
 
 nav li {
@@ -150,27 +153,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 300%;
+    font-size: 200%;
 }
 
 h2 {
-    font-size: 270%;
+    font-size: 170%;
 }
 
 h3 {
-    font-size: 240%;
+    font-size: 140%;
 }
 
 h4 {
-    font-size: 210%;
+    font-size: 130%;
 }
 
 h5, .container-overview .subsection-title {
-    font-size: 180%;
+    font-size: 120%;
 }
 
 h6 {
-    font-size: 150%;
+    font-size: 110%;
 }
 
 .page-title {
@@ -180,11 +183,10 @@ h6 {
     padding: 40px;
     color: #ffffff;
     text-shadow: 1px 1px 0 #000000;
-    font-size: 400%;
+    font-size: 250%;
     font-weight: 300;
     line-height: 0.5;
 }
-
 
 .ancestors {
     color: #999;
@@ -209,7 +211,7 @@ h6 {
 }
 
 h4.name {
-    border-left: 10px solid #e66000; 
+    border-left: 10px solid #e66000;
     padding: 0 20px;
 }
 
@@ -249,17 +251,21 @@ h4.name {
     padding-top: 0;
 }
 
+dd > .description {
+    margin-left: -16px;
+}
+
 .description {
     margin-bottom: 1em;
-    margin-left: -16px;
+    margin-left: 20px;
     margin-top: 1em;
 }
 
-.description p{
+.description p {
     margin: 0;
 }
 
-tt, code, kbd, samp, pre, xmp, plaintext, listing {
+tt, code, kbd, samp, pre {
     font-family: 'Share Tech Mono', monospace;
     font-size: 90%;
 }
@@ -300,6 +306,7 @@ tt, code, kbd, samp, pre, xmp, plaintext, listing {
     border-collapse: collapse;
     border: 1px solid #FFCFAC;
 }
+
 .params .name, .props .name, .name code {
     color: #A35A00;
     font-family: 'Share Tech Mono', monospace;
@@ -314,10 +321,12 @@ tt, code, kbd, samp, pre, xmp, plaintext, listing {
     padding: 4px 6px;
     display: table-cell;
 }
+
 .params th, .props th {
     color: #ffffff;
     font-weight: 300;
 }
+
 .params thead tr, .props thead tr {
     background-color: #e66000;
     font-weight: 300;
@@ -331,6 +340,7 @@ tt, code, kbd, samp, pre, xmp, plaintext, listing {
 .disabled {
     color: #454545;
 }
+
 blockquote {
     background: #ffecdf;
     margin: 1.5em 10px;
@@ -338,6 +348,7 @@ blockquote {
     quotes: "\201C" "\201D";
     position: relative;
 }
+
 blockquote:before {
     color: #e66000;
     content: open-quote;
@@ -345,6 +356,7 @@ blockquote:before {
     position: absolute;
     left: 0;
 }
+
 blockquote:after {
     color: #ccc;
     content: close-quote;
