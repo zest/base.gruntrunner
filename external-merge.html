@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ZEST / base.gruntrunner / Source: index.js</title>
+    <title>ZEST / base.gruntrunner / External: merge</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,56 +17,96 @@
 
 <div id="main">
     
-    <h1 class="page-title">ZEST / base.gruntrunner / Source: index.js</h1>
+    <h1 class="page-title">ZEST / base.gruntrunner / External: merge</h1>
     
     
 
 
+
+<section>
     
-    <section>
-        <article>
-            <pre class="prettyprint source"><code>/**
- * @fileOverview this module returns a grunt script that configures clean, test, document, coverage and observe tasks
- * for the dependent module.
- * @module base-gruntrunner
- * @requires {@link external:merge}
- * @requires {@link external:path}
- */
-'use strict';
-var merge = require('merge'),
-    path = require('path');
-/**
- * This is the grunt export
- *
- *  - hello
- *  - world
- *
- * @param [*] grunt - the grunt object
- */
-module.exports = function (grunt) {
-    var modulePath = path.relative(
-        path.join(process.cwd() + '/node_modules'),
-        path.join(__dirname, '../node_modules')
-    );
-    // create 
-    var pkg = merge.recursive(
-        {
-            directories: {
-                lib: 'lib',
-                out: '.out'
-            }
-        },
-        grunt.file.readJSON('package.json')
-    );
-    // read the package.json for use
-    grunt.config('pkg', pkg);
-    require('./tasks/clean')(grunt, modulePath);
-    require('./tasks/document')(grunt, modulePath);
-    require('./tasks/test')(grunt, modulePath);
-    require('./tasks/observe')(grunt, modulePath);
-};</code></pre>
-        </article>
-    </section>
+<header>
+    <h2>
+    merge
+    </h2>
+    
+</header>  
+
+<article>
+    <div class="container-overview">
+    
+    
+    
+        
+            <div class="description"><p>The node stream.Readable class</p></div>
+        
+        
+        
+<dl class="details">
+    
+        
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="typedef.js.html">typedef.js</a>, <a href="typedef.js.html#line2">line 2</a>
+    </li></ul></dd>
+    
+    
+    
+    
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="http://nodejs.org/api/stream.html#stream_class_stream_readable">http://nodejs.org/api/stream.html#stream_class_stream_readable</a></li>
+        </ul>
+    </dd>
+    
+    
+    
+</dl>
+
+        
+        
+    
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</article>
+
+</section>  
 
 
 

@@ -81,15 +81,38 @@ changes and run jshint validations and test cases everytime any relevant file ch
 The coveralls task is used to submit coverage report to coveralls. This task will only run successfully from 
 <strong>travis-ci</strong>.</p>
 </li>
-<li><p><code>gh-pages</code></p>
+<li><p><code>gh-pages</code>
+The gh-pages task pushes the module documentation into the projects github site.</p>
 </li>
 </ul>
 <h2>assumptions</h2>
-<p>TODO</p>
+<p>The gruntrunner assumes the following</p>
+<ul>
+<li>the test scripts are written using mocha.</li>
+<li>the code is documented in JSDoc syntax.</li>
+<li>the source files are present in the folder specified in <code>directories.lib</code> property in <code>package.json</code></li>
+<li>if <code>directories.lib</code> property in <code>package.json</code> is not found, the source directory is assumed to be <code>./lib</code></li>
+<li>the test files are present in the folder specified in <code>directories.test</code> property in <code>package.json</code></li>
+<li>if <code>directories.test</code> property in <code>package.json</code> is not found, no test cases will run and no coverage will be 
+generated</li>
+<li><p>coverage reports are generated using <a href="http://blanketjs.org/">blanket</a>. So, if the test directory is present,
+coverage config must be present in <code>package.json</code>. Below is an example configuration.</p>
+<pre><code class="lang-json">&quot;config&quot;: {
+    &quot;blanket&quot;: {
+        &quot;pattern&quot;: &quot;//^(?!.*/node_modules/).*/lib/&quot; 
+    } 
+}</code></pre>
+</li>
+</ul>
 <h2>usage</h2>
-<p>TODO</p>
-<h2>adding more tasks</h2>
-<p>TODO</p></article>
+<p>For the most simple usage where the default behavior is enough, one line in <code>GruntFile.js</code> will be enough.</p>
+<pre><code class="lang-js">    module.exports = require('./lib');</code></pre>
+<p>However, if you want to add other tasks and (maybe) fiddle with the gruntrunner tasks, you can use it as shown below.</p>
+<pre><code class="lang-js">    module.exports = function(grunt) {
+        ...
+        require('./lib')(grunt);
+        ...
+    }</code></pre></article>
     </section>
 
 
@@ -103,7 +126,7 @@ The coveralls task is used to submit coverage report to coveralls. This task wil
 </div>
 
 <nav>
-    <h2><a href="index.html">base.gruntrunner</a></h2><h3>Modules</h3><ul><li><a href="module-base-gruntrunner.html">base-gruntrunner</a></li></ul>
+    <h2><a href="index.html">base.gruntrunner</a></h2><h3>Modules</h3><ul><li><a href="module-base-gruntrunner.html">base-gruntrunner</a></li></ul><h3>Externals</h3><ul><li><a href="external-merge.html">merge</a></li><li><a href="external-path.html">path</a></li></ul>
 </nav>
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>

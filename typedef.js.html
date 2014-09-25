@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ZEST / base.gruntrunner / Source: index.js</title>
+    <title>ZEST / base.gruntrunner / Source: typedef.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">ZEST / base.gruntrunner / Source: index.js</h1>
+    <h1 class="page-title">ZEST / base.gruntrunner / Source: typedef.js</h1>
     
     
 
@@ -26,45 +26,15 @@
     <section>
         <article>
             <pre class="prettyprint source"><code>/**
- * @fileOverview this module returns a grunt script that configures clean, test, document, coverage and observe tasks
- * for the dependent module.
- * @module base-gruntrunner
- * @requires {@link external:merge}
- * @requires {@link external:path}
+ * The node stream.Readable class
+ * @external path
+ * @see {@link http://nodejs.org/api/stream.html#stream_class_stream_readable}
  */
-'use strict';
-var merge = require('merge'),
-    path = require('path');
 /**
- * This is the grunt export
- *
- *  - hello
- *  - world
- *
- * @param [*] grunt - the grunt object
- */
-module.exports = function (grunt) {
-    var modulePath = path.relative(
-        path.join(process.cwd() + '/node_modules'),
-        path.join(__dirname, '../node_modules')
-    );
-    // create 
-    var pkg = merge.recursive(
-        {
-            directories: {
-                lib: 'lib',
-                out: '.out'
-            }
-        },
-        grunt.file.readJSON('package.json')
-    );
-    // read the package.json for use
-    grunt.config('pkg', pkg);
-    require('./tasks/clean')(grunt, modulePath);
-    require('./tasks/document')(grunt, modulePath);
-    require('./tasks/test')(grunt, modulePath);
-    require('./tasks/observe')(grunt, modulePath);
-};</code></pre>
+ * The node stream.Readable class
+ * @external merge
+ * @see {@link http://nodejs.org/api/stream.html#stream_class_stream_readable}
+ */</code></pre>
         </article>
     </section>
 
