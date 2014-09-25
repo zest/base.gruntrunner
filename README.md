@@ -43,22 +43,49 @@ The grunt runner defines the following general tasks into the grunt file.
     **travis-ci**.
   
   - `gh-pages`
+    The gh-pages task pushes the module documentation into the projects github site.
     
 
 ## assumptions
 
-TODO
+The gruntrunner assumes the following
 
+ -  the test scripts are written using mocha.
+ -  the code is documented in JSDoc syntax.
+ -  the source files are present in the folder specified in `directories.lib` property in `package.json`
+ -  if `directories.lib` property in `package.json` is not found, the source directory is assumed to be `./lib`
+ -  the test files are present in the folder specified in `directories.test` property in `package.json`
+ -  if `directories.test` property in `package.json` is not found, no test cases will run and no coverage will be 
+    generated
+ -  coverage reports are generated using [blanket](http://blanketjs.org/). So, if the test directory is present,
+    coverage config must be present in `package.json`. Below is an example configuration.
+    
+    ``` json
+    "config": {
+        "blanket": {
+            "pattern": "//^(?!.*/node_modules/).*/lib/" 
+        } 
+    }
+    ```
 
 ## usage
 
-TODO
+For the most simple usage where the default behavior is enough, one line in `GruntFile.js` will be enough.
+
+``` js
+    module.exports = require('./lib');
+```
+
+However, if you want to add other tasks and (maybe) fiddle with the gruntrunner tasks, you can use it as shown below.
 
 
-## adding more tasks
-
-TODO
-
+``` js
+    module.exports = function(grunt) {
+        ...
+        require('./lib')(grunt);
+        ...
+    }
+```
 
 
 [dependencies-image]: http://img.shields.io/david/zest/base.gruntrunner.svg?style=flat-square
