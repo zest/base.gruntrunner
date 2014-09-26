@@ -118,6 +118,7 @@ module.exports = function (grunt, gruntModuleDirectory) {
         grunt.registerTask(
             'lib-queue',
             onlyDocs ? [
+                'clean',
                 'document'
             ] : [
                 'jshint:lib',
@@ -144,6 +145,7 @@ module.exports = function (grunt, gruntModuleDirectory) {
         grunt.registerTask(
             'lib-queue',
             onlyDocs ? [
+                'clean',
                 'document'
             ] : [
                 'jshint:lib'
@@ -159,9 +161,9 @@ module.exports = function (grunt, gruntModuleDirectory) {
     grunt.registerTask(
         'observe',
         onlyDocs ? [
+            'clean',
             'document',
-            'watch:lib',
-            'watch:build'
+            'watch:lib'
         ] : [
             'test',
             'watch'
@@ -174,7 +176,8 @@ module.exports = function (grunt, gruntModuleDirectory) {
             'observe'
         ]
     );
-};</code></pre>
+};
+</code></pre>
         </article>
     </section>
 
