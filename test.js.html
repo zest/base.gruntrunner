@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ZEST / base.gruntrunner / Source: tasks/test.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">ZEST / base.gruntrunner / Source: tasks/test.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>'use strict';
+/**
+ * @fileOverview this module registers a grunt task to run mocha tests and generate coverage reports.
+ * @module tasks/test
+ * @requires {@link external:merge}
+ * @requires {@link external:grunt-contrib-clean}
+ */
+var path = require('path');
+var merge = require('merge');
+/**
+ * this function registers a grunt task to run mocha tests and generate coverage reports. The below tasks are created
+ *
+ *  -  `jshint:lib` for running jshint tests on main source files
+ *  -  `jshint:test` for running jshint tests on test files. This task is not created if there are no test files.
+ *  -  `jshint:build` for running jshint tests on build files (GruntFile and package.json).
+ *  -  `mochacov:test` for running mocha tests. This task is not created if there are no test files
+ *  -  `mochacov:coverage` for generating coverage report in terminal. This task is not created if there are no test
+ *      files
+ *  -  `mochacov:coveralls` for pushing coverage report to coveralls. This task is not created if there are no test
+ *      files
+ *  -  `coveralls` which is an alias for `mochacov:coveralls`. If there are no tests, this task doesn't do anything
+ *  -  `test` which is an alias for `jshint:lib`, `jshint:test`, `jshint:build`, `mochacov:test` and
+ *      `mochacov:coverage`. If there are no tests, mochacov:* and jshint:test are not present.
+ *
+ * @param {*} grunt - the grunt object
+ * @param {string} gruntModuleDirectory - the directory where the grunt modules are located
+ */
+module.exports = function (grunt, gruntModuleDirectory) {
+    var isTest = grunt.config('pkg.directories.test');
+    // global variables are defined here
+    var files = {
+        lib: [
+            '&lt;%= pkg.directories.lib %>/**/*.js',
+            '&lt;%= pkg.directories.lib %>/**/*.json'
+        ],
+        test: [
+            '&lt;%= pkg.directories.test %>/**/*.js',
+            '&lt;%= pkg.directories.test %>/**/*.json',
+            '!**/node_modules/**'
+        ],
+        build: [
+            'Gruntfile.js',
+            'package.json'
+        ]
+    };
+    var mochaGlobals = [
+        'describe',
+        'it',
+        'beforeEach',
+        'afterEach',
+        'before',
+        'after'
+    ];
+    var jshintOptions = {
+        nonew: true,
+        plusplus: true,
+        curly: true,
+        latedef: true,
+        maxdepth: 6,
+        unused: true,
+        noarg: true,
+        trailing: true,
+        indent: 4,
+        forin: true,
+        noempty: true,
+        quotmark: true,
+        maxparams: 6,
+        node: true,
+        maxstatements: 30,
+        eqeqeq: true,
+        strict: true,
+        undef: true,
+        bitwise: true,
+        newcap: true,
+        immed: true,
+        camelcase: true,
+        maxcomplexity: 7,
+        maxlen: 120,
+        nonbsp: true,
+        freeze: true
+    };
+    // load the required npm tasks for code quality
+    grunt.loadNpmTasks(path.join(gruntModuleDirectory, 'grunt-contrib-jshint'));
+    // load the required npm tasks for running node mocha tests and code coverage reports
+    if (isTest) {
+        grunt.loadNpmTasks(path.join(gruntModuleDirectory, 'grunt-mocha-cov'));
+        // mocha configuration
+        grunt.config(
+            'mochacov', {
+                options: {
+                    // set test-case timeout in milliseconds [2000]
+                    timeout: 50000,
+                    // check for global variable leaks.
+                    'check-leaks': true,
+                    // specify user-interface (bdd|tdd|exports).
+                    ui: 'bdd',
+                    // "slow" test threshold in milliseconds [75].
+                    slow: 10,
+                    files: [
+                        '&lt;%= pkg.directories.test %>/**/*.js',
+                        '!**/node_modules/**'
+                    ]
+                },
+                // default test option
+                test: {
+                    options: {
+                        reporter: 'spec'
+                    }
+                },
+                coverage: {
+                    options: {
+                        reporter: 'mocha-term-cov-reporter',
+                        coverage: true
+                    }
+                },
+                // for sending coverage report to coveralls
+                coveralls: {
+                    options: {
+                        coveralls: true
+                    }
+                }
+            }
+        );
+    }
+    // js-hint configuration
+    grunt.config(
+        [
+            'jshint',
+            'lib'
+        ], {
+            // validation for all server javascript files
+            src: files.lib,
+            options: jshintOptions
+        }
+    );
+    // validation for all server javascript specifications
+    if (isTest) {
+        grunt.config(
+            [
+                'jshint',
+                'test'
+            ],
+            {
+                src: files.test,
+                options: merge(
+                    {
+                        predef: mochaGlobals
+                    },
+                    jshintOptions
+                )
+            }
+        );
+    }
+    // validation for all server javascript specifications
+    grunt.config(
+        [
+            'jshint',
+            'build'
+        ], {
+            src: files.build,
+            options: jshintOptions
+        }
+    );
+    // for faster builds we make sure that only the changed files are validated
+    (function () {
+        // save the watch timeouts to keep track of the ongoing watches
+        var watchTimeouts = {};
+        grunt.event.on(
+            'watch', function (action, filepath, target) {
+                if (action !== 'deleted' && /\.(js(on)?)$/i.test(filepath)) {
+                    var config = [],
+                        jshintSrc = 'jshint.' + target + '.src';
+                    if (watchTimeouts[target]) {
+                        // if there is an ongoing watch event, append the new files
+                        // in the file list
+                        clearTimeout(watchTimeouts[target]);
+                        config = grunt.config(jshintSrc);
+                    } else {
+                        // in case of a new watch, create a new file list
+                        grunt.config(jshintSrc, config);
+                    }
+                    // pass the file for jshint validation only if it is a javascript or a json file
+                    config.push(filepath);
+                    grunt.config(jshintSrc, config);
+                    watchTimeouts[target] = setTimeout(
+                        function () {
+                            watchTimeouts[target] = undefined;
+                        }, 1000
+                    );
+                }
+            }
+        );
+    }());
+    if (isTest) {
+        // coverage script
+        grunt.registerTask(
+            'coveralls',
+            [
+                'mochacov:coveralls'
+            ]
+        );
+        // test script
+        grunt.registerTask(
+            'test',
+            [
+                'jshint:lib',
+                'jshint:test',
+                'jshint:build',
+                'mochacov:test',
+                'mochacov:coverage'
+            ]
+        );
+    } else {
+        // coverage script
+        grunt.registerTask(
+            'coveralls',
+            []
+        );
+        // test script
+        grunt.registerTask(
+            'test',
+            [
+                'jshint:lib',
+                'jshint:build'
+            ]
+        );
+    }
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+    <footer>
+        <a href="http://zest.github.io/base.resolver/">base.resolver</a>  | <a href="http://zest.github.io/base.resolver-cli/">base.resolver-cli</a>  | <a href="http://zest.github.io/base.logger/">base.logger</a>  | <a href="http://zest.github.io/base.gruntrunner/">base.gruntrunner</a>  | <a href="http://zest.github.io/datastore.mongo/">datastore.mongo</a>  | <a href="http://zest.github.io/filestore.disk/">filestore.disk</a>  | <a href="http://zest.github.io/privilege.datastore/">privilege.datastore</a>  | <a href="http://zest.github.io/user.datastore/">user.datastore</a>  | <a href="http://zest.github.io/application.rest/">application.rest</a>  | <a href="http://zest.github.io/integration.embodier/">integration.embodier</a> 
+    </footer>
+</div>
+
+<nav>
+    <h2><a href="index.html">base.gruntrunner</a></h2><h3>Modules</h3><ul><li><a href="module-base-gruntrunner.html">base-gruntrunner</a></li><li><a href="clean.html">tasks/clean</a></li><li><a href="document.html">tasks/document</a></li><li><a href="observe.html">tasks/observe</a></li><li><a href="test.html">tasks/test</a></li></ul><h3>Externals</h3><ul><li><a href="external-grunt-contrib-clean.html">grunt-contrib-clean</a></li><li><a href="external-grunt-contrib-jshint.html">grunt-contrib-jshint</a></li><li><a href="external-grunt-contrib-watch.html">grunt-contrib-watch</a></li><li><a href="external-grunt-gh-pages.html">grunt-gh-pages</a></li><li><a href="external-grunt-jsdoc.html">grunt-jsdoc</a></li><li><a href="external-grunt-mocha-cov.html">grunt-mocha-cov</a></li><li><a href="external-merge.html">merge</a></li><li><a href="external-mocha-term-cov-reporter.html">mocha-term-cov-reporter</a></li><li><a href="external-path.html">path</a></li></ul>
+</nav>
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

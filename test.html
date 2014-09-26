@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ZEST / base.gruntrunner / Module: base-gruntrunner</title>
+    <title>ZEST / base.gruntrunner / Module: tasks/test</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">ZEST / base.gruntrunner / Module: base-gruntrunner</h1>
+    <h1 class="page-title">ZEST / base.gruntrunner / Module: tasks/test</h1>
     
     
 
@@ -27,7 +27,7 @@
     
 <header>
     <h2>
-    base-gruntrunner
+    tasks/test
     </h2>
     
 </header>  
@@ -37,7 +37,7 @@
     
         
 <dt>
-    <h4 class="name" id="module:base-gruntrunner"><span class="type-signature"></span>require("base-gruntrunner")<span class="signature">(<span class="optional">*</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:tasks/test"><span class="type-signature"></span>require("tasks/test")<span class="signature">(grunt, gruntModuleDirectory)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -45,10 +45,20 @@
     
     
     <div class="description">
-        <p>Here, we resolve the module path for the npm tasks and read package.json for the project. <code>package.json</code> object is
-stored in the <code>pkg</code> config. Once this is done, the <a href="clean.html">clean</a>,
-<a href="document.html">document</a>, <a href="test.html">test</a> and <a href="observe.html">observe</a>
-modules are invoked for registering tasks.</p>
+        <p>this function registers a grunt task to run mocha tests and generate coverage reports. The below tasks are created</p>
+<ul>
+<li><code>jshint:lib</code> for running jshint tests on main source files</li>
+<li><code>jshint:test</code> for running jshint tests on test files. This task is not created if there are no test files.</li>
+<li><code>jshint:build</code> for running jshint tests on build files (GruntFile and package.json).</li>
+<li><code>mochacov:test</code> for running mocha tests. This task is not created if there are no test files</li>
+<li><code>mochacov:coverage</code> for generating coverage report in terminal. This task is not created if there are no test
+ files</li>
+<li><code>mochacov:coveralls</code> for pushing coverage report to coveralls. This task is not created if there are no test
+ files</li>
+<li><code>coveralls</code> which is an alias for <code>mochacov:coveralls</code>. If there are no tests, this task doesn't do anything</li>
+<li><code>test</code> which is an alias for <code>jshint:lib</code>, <code>jshint:test</code>, <code>jshint:build</code>, <code>mochacov:test</code> and
+ <code>mochacov:coverage</code>. If there are no tests, mochacov:* and jshint:test are not present.</li>
+</ul>
     </div>
     
 
@@ -70,8 +80,6 @@ modules are invoked for registering tasks.</p>
 		<th>Type</th>
 		
 		
-		<th>Argument</th>
-		
 		
 		
 		
@@ -84,28 +92,46 @@ modules are invoked for registering tasks.</p>
 	
         <tr>
             
-                <td class="name"><code>*</code></td>
+                <td class="name"><code>grunt</code></td>
             
             
             <td class="type">
             
+                
+<span class="param-type">*</span>
+
+
+            
             </td>
             
             
-                <td class="attributes">
+            
+            
+            
+            <td class="description last"><p>the grunt object</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>gruntModuleDirectory</code></td>
+            
+            
+            <td class="type">
+            
                 
-                    &lt;optional><br>
-                
-                    
-                
-                    
-                
-                </td>
+<span class="param-type">string</span>
+
+
+            
+            </td>
             
             
             
             
-            <td class="description last"><p>grunt - the grunt object</p></td>
+            
+            <td class="description last"><p>the directory where the grunt modules are located</p></td>
         </tr>
 	
 	
@@ -136,7 +162,7 @@ modules are invoked for registering tasks.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line22">line 22</a>
+        <a href="test.js.html">tasks/test.js</a>, <a href="test.js.html#line28">line 28</a>
     </li></ul></dd>
     
     
@@ -165,8 +191,7 @@ modules are invoked for registering tasks.</p>
     
     
         
-            <div class="description"><p>this module returns a grunt script that configures clean, test, document, coverage and observe tasks
-for the dependent module.</p></div>
+            <div class="description"><p>this module registers a grunt task to run mocha tests and generate coverage reports.</p></div>
         
         
         
@@ -192,7 +217,7 @@ for the dependent module.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+        <a href="test.js.html">tasks/test.js</a>, <a href="test.js.html#line2">line 2</a>
     </li></ul></dd>
     
     
@@ -216,17 +241,9 @@ for the dependent module.</p></div>
         <h3 class="subsection-title">Requires</h3>
         
         <ul>
-            <li><a href="clean.html">module:tasks/clean</a></li>
-        
-            <li><a href="test.html">module:tasks/test</a></li>
-        
-            <li><a href="document.html">module:tasks/document</a></li>
-        
-            <li><a href="observe.html">module:tasks/observe</a></li>
-        
             <li><a href="external-merge.html">external:merge</a></li>
         
-            <li><a href="external-path.html">external:path</a></li>
+            <li><a href="external-grunt-contrib-clean.html">external:grunt-contrib-clean</a></li>
         </ul>
     
     

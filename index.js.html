@@ -29,18 +29,21 @@
  * @fileOverview this module returns a grunt script that configures clean, test, document, coverage and observe tasks
  * for the dependent module.
  * @module base-gruntrunner
+ * @requires tasks/clean
+ * @requires tasks/test
+ * @requires tasks/document
+ * @requires tasks/observe
  * @requires {@link external:merge}
  * @requires {@link external:path}
  */
 'use strict';
-var merge = require('merge'),
-    path = require('path');
+var merge = require('merge');
+var path = require('path');
 /**
- * This is the grunt export
- *
- *  - hello
- *  - world
- *
+ * Here, we resolve the module path for the npm tasks and read package.json for the project. `package.json` object is
+ * stored in the `pkg` config. Once this is done, the {@link module:tasks/clean|clean},
+ * {@link module:tasks/document|document}, {@link module:tasks/test|test} and {@link module:tasks/observe|observe}
+ * modules are invoked for registering tasks.
  * @param [*] grunt - the grunt object
  */
 module.exports = function (grunt) {
@@ -48,7 +51,7 @@ module.exports = function (grunt) {
         path.join(process.cwd() + '/node_modules'),
         path.join(__dirname, '../node_modules')
     );
-    // create 
+    // if lib or out directory is not set, we set it to 'lib' and '.out'
     var pkg = merge.recursive(
         {
             directories: {
@@ -58,7 +61,7 @@ module.exports = function (grunt) {
         },
         grunt.file.readJSON('package.json')
     );
-    // read the package.json for use
+    // store the package.json for use
     grunt.config('pkg', pkg);
     require('./tasks/clean')(grunt, modulePath);
     require('./tasks/document')(grunt, modulePath);
@@ -77,7 +80,7 @@ module.exports = function (grunt) {
 </div>
 
 <nav>
-    <h2><a href="index.html">base.gruntrunner</a></h2><h3>Modules</h3><ul><li><a href="module-base-gruntrunner.html">base-gruntrunner</a></li></ul><h3>Externals</h3><ul><li><a href="external-merge.html">merge</a></li><li><a href="external-path.html">path</a></li></ul>
+    <h2><a href="index.html">base.gruntrunner</a></h2><h3>Modules</h3><ul><li><a href="module-base-gruntrunner.html">base-gruntrunner</a></li><li><a href="clean.html">tasks/clean</a></li><li><a href="document.html">tasks/document</a></li><li><a href="observe.html">tasks/observe</a></li><li><a href="test.html">tasks/test</a></li></ul><h3>Externals</h3><ul><li><a href="external-grunt-contrib-clean.html">grunt-contrib-clean</a></li><li><a href="external-grunt-contrib-jshint.html">grunt-contrib-jshint</a></li><li><a href="external-grunt-contrib-watch.html">grunt-contrib-watch</a></li><li><a href="external-grunt-gh-pages.html">grunt-gh-pages</a></li><li><a href="external-grunt-jsdoc.html">grunt-jsdoc</a></li><li><a href="external-grunt-mocha-cov.html">grunt-mocha-cov</a></li><li><a href="external-merge.html">merge</a></li><li><a href="external-mocha-term-cov-reporter.html">mocha-term-cov-reporter</a></li><li><a href="external-path.html">path</a></li></ul>
 </nav>
 <script> prettyPrint(); </script>
 <script src="scripts/linenumber.js"> </script>

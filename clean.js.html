@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ZEST / base.gruntrunner / External: merge</title>
+    <title>ZEST / base.gruntrunner / Source: tasks/clean.js</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,87 +17,41 @@
 
 <div id="main">
     
-    <h1 class="page-title">ZEST / base.gruntrunner / External: merge</h1>
+    <h1 class="page-title">ZEST / base.gruntrunner / Source: tasks/clean.js</h1>
     
     
 
 
-
-<section>
     
-<header>
-    <h2>
-    merge
-    </h2>
-    
-</header>  
-
-<article>
-    <div class="container-overview">
-    
-    
-    
-        
-        
-        
-<dl class="details">
-    
-        
-    
-    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="typedef.js.html">typedef.js</a>, <a href="typedef.js.html#line8">line 8</a>
-    </li></ul></dd>
-    
-    
-    
-    
-    
-    
-    
-</dl>
-
-        
-        
-    
-    </div>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-</article>
-
-</section>  
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>'use strict';
+/**
+ * @fileOverview this module registers a grunt task to clean the output directory.
+ * @module tasks/clean
+ * @requires {@link external:path}
+ * @requires {@link external:grunt-contrib-clean}
+ */
+var path = require('path');
+/**
+ * This function rtegisters a `clean` task to clean output directory
+ * @param {*} grunt - the grunt object
+ * @param {string} gruntModuleDirectory - the directory where the grunt modules are located
+ */
+module.exports = function (grunt, gruntModuleDirectory) {
+    // load the required npm tasks for cleaning the output directories
+    grunt.loadNpmTasks(path.join(gruntModuleDirectory, 'grunt-contrib-clean'));
+    // clean configuration
+    grunt.config(
+        'clean', {
+            out: [
+                '&lt;%= pkg.directories.out %>'
+            ]
+        }
+    );
+};</code></pre>
+        </article>
+    </section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ZEST / base.gruntrunner / Module: base-gruntrunner</title>
+    <title>ZEST / base.gruntrunner / Module: tasks/observe</title>
     
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">ZEST / base.gruntrunner / Module: base-gruntrunner</h1>
+    <h1 class="page-title">ZEST / base.gruntrunner / Module: tasks/observe</h1>
     
     
 
@@ -27,7 +27,7 @@
     
 <header>
     <h2>
-    base-gruntrunner
+    tasks/observe
     </h2>
     
 </header>  
@@ -37,7 +37,7 @@
     
         
 <dt>
-    <h4 class="name" id="module:base-gruntrunner"><span class="type-signature"></span>require("base-gruntrunner")<span class="signature">(<span class="optional">*</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="module:tasks/observe"><span class="type-signature"></span>require("tasks/observe")<span class="signature">(grunt, gruntModuleDirectory)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -45,10 +45,20 @@
     
     
     <div class="description">
-        <p>Here, we resolve the module path for the npm tasks and read package.json for the project. <code>package.json</code> object is
-stored in the <code>pkg</code> config. Once this is done, the <a href="clean.html">clean</a>,
-<a href="document.html">document</a>, <a href="test.html">test</a> and <a href="observe.html">observe</a>
-modules are invoked for registering tasks.</p>
+        <p>this function registers a grunt task to run tests (and optionally documentation) on file changes. The below tasks
+are created</p>
+<ul>
+<li><code>watch:lib</code> for watching lib file changes and running <code>lib-queue</code> when files change</li>
+<li><code>watch:test</code> for watching test file changes and running <code>test-queue</code> when files change. This task is only
+ available if test files exist.</li>
+<li><code>watch:build</code> for watching build file changes and running <code>build-queue</code> when files change</li>
+<li><code>lib-queue</code> which runs the jshint and test scripts for lib files</li>
+<li><code>test-queue</code> which runs the jshint script for lib files and test scripts</li>
+<li><code>build-queue</code> which runs the jshint and test scripts for build files</li>
+<li><code>watch</code></li>
+<li><code>observe</code></li>
+<li><code>deafault</code></li>
+</ul>
     </div>
     
 
@@ -70,8 +80,6 @@ modules are invoked for registering tasks.</p>
 		<th>Type</th>
 		
 		
-		<th>Argument</th>
-		
 		
 		
 		
@@ -84,28 +92,46 @@ modules are invoked for registering tasks.</p>
 	
         <tr>
             
-                <td class="name"><code>*</code></td>
+                <td class="name"><code>grunt</code></td>
             
             
             <td class="type">
             
+                
+<span class="param-type">*</span>
+
+
+            
             </td>
             
             
-                <td class="attributes">
+            
+            
+            
+            <td class="description last"><p>the grunt object</p></td>
+        </tr>
+	
+	
+	
+        <tr>
+            
+                <td class="name"><code>gruntModuleDirectory</code></td>
+            
+            
+            <td class="type">
+            
                 
-                    &lt;optional><br>
-                
-                    
-                
-                    
-                
-                </td>
+<span class="param-type">string</span>
+
+
+            
+            </td>
             
             
             
             
-            <td class="description last"><p>grunt - the grunt object</p></td>
+            
+            <td class="description last"><p>the directory where the grunt modules are located</p></td>
         </tr>
 	
 	
@@ -136,7 +162,7 @@ modules are invoked for registering tasks.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line22">line 22</a>
+        <a href="observe.js.html">tasks/observe.js</a>, <a href="observe.js.html#line27">line 27</a>
     </li></ul></dd>
     
     
@@ -165,8 +191,7 @@ modules are invoked for registering tasks.</p>
     
     
         
-            <div class="description"><p>this module returns a grunt script that configures clean, test, document, coverage and observe tasks
-for the dependent module.</p></div>
+            <div class="description"><p>this module registers a grunt task to run tests (and optionally documentation) on file changes.</p></div>
         
         
         
@@ -192,7 +217,7 @@ for the dependent module.</p></div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line1">line 1</a>
+        <a href="observe.js.html">tasks/observe.js</a>, <a href="observe.js.html#line2">line 2</a>
     </li></ul></dd>
     
     
@@ -216,17 +241,9 @@ for the dependent module.</p></div>
         <h3 class="subsection-title">Requires</h3>
         
         <ul>
-            <li><a href="clean.html">module:tasks/clean</a></li>
-        
-            <li><a href="test.html">module:tasks/test</a></li>
-        
-            <li><a href="document.html">module:tasks/document</a></li>
-        
-            <li><a href="observe.html">module:tasks/observe</a></li>
-        
-            <li><a href="external-merge.html">external:merge</a></li>
-        
             <li><a href="external-path.html">external:path</a></li>
+        
+            <li><a href="external-grunt-contrib-watch.html">external:grunt-contrib-watch</a></li>
         </ul>
     
     

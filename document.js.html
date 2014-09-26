@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ZEST / base.gruntrunner / Source: tasks/document.js</title>
+    
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+    
+    <h1 class="page-title">ZEST / base.gruntrunner / Source: tasks/document.js</h1>
+    
+    
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source"><code>'use strict';
+/**
+ * @fileOverview this module registers a grunt task to generate jsdoc from sources and uploading them to gh-pages
+ * branch in github.
+ * @module tasks/document
+ * @requires {@link external:path}
+ * @requires {@link external:grunt-jsdoc}
+ * @requires {@link external:grunt-gh-pages}
+ */
+var path = require('path');
+/**
+ * this function registers a grunt task to generate jsdoc from sources and uploading them to gh-pages branch in github.
+ * The below tasks are created
+ *
+ *  -  `gh-pages` for pushing generated documentation to github gh-pages
+ *  -  `jsdoc:lib` to generate jsdoc documentation
+ *  -  `document` which is an alias to `jsdoc:lib`
+ *
+ * @param {*} grunt - the grunt object
+ * @param {string} gruntModuleDirectory - the directory where the grunt modules are located
+ */
+module.exports = function (grunt, gruntModuleDirectory) {
+    var documentationFiles = [
+        '&lt;%= pkg.directories.lib %>/**/*.js',
+        '&lt;%= pkg.directories.lib %>/**/*.json',
+        './README.md'
+    ];
+    var jsDocConfig = grunt.file.readJSON(path.join('node_modules', gruntModuleDirectory, '../conf/jsdoc.json'));
+    jsDocConfig.templates.component = grunt.config('pkg.name');
+    grunt.file.write(
+        path.join('node_modules', gruntModuleDirectory, '../conf/__jsdoc__.json'),
+        JSON.stringify(jsDocConfig)
+    );
+    // load the required npm tasks for generating jsdoc documentation
+    grunt.loadNpmTasks(path.join(gruntModuleDirectory, 'grunt-jsdoc'));
+    // load the required npm tasks for generating github website
+    grunt.loadNpmTasks(path.join(gruntModuleDirectory, 'grunt-gh-pages'));
+    // jsdoc configuration
+    grunt.config(
+        'jsdoc', {
+            lib: {
+                src: documentationFiles,
+                dest: '&lt;%= pkg.directories.out %>/documentation',
+                options: {
+                    configure: path.join('node_modules', gruntModuleDirectory, '../conf/__jsdoc__.json'),
+                    template: path.join('node_modules', gruntModuleDirectory, '../conf/jsdoc-theme')
+                },
+                jsdoc: path.join('node_modules', gruntModuleDirectory, './grunt-jsdoc/node_modules/jsdoc/jsdoc')
+            }
+        }
+    );
+    // pushing to github pages
+    grunt.config(
+        'gh-pages', {
+            options: {
+                base: '&lt;%= pkg.directories.out %>/documentation',
+                repo: 'https://' + process.env.GH_TOKEN + '@github.com/zest/&lt;%= pkg.name %>.git',
+                clone: '&lt;%= pkg.directories.out %>/gh_pages',
+                message: 'auto commit &lt;%= pkg.name %> on &lt;%= grunt.template.today("yyyy-mm-dd") %>',
+                silent: true,
+                user: {
+                    name: 'travis-ci',
+                    email: 'travis-ci@zest.com'
+                }
+            },
+            src: [
+                '**'
+            ]
+        }
+    );
+    // scripts exposed from package.json
+    // document script
+    grunt.registerTask(
+        'document',
+        [
+            'jsdoc:lib'
+        ]
+    );
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+    <footer>
+        <a href="http://zest.github.io/base.resolver/">base.resolver</a>  | <a href="http://zest.github.io/base.resolver-cli/">base.resolver-cli</a>  | <a href="http://zest.github.io/base.logger/">base.logger</a>  | <a href="http://zest.github.io/base.gruntrunner/">base.gruntrunner</a>  | <a href="http://zest.github.io/datastore.mongo/">datastore.mongo</a>  | <a href="http://zest.github.io/filestore.disk/">filestore.disk</a>  | <a href="http://zest.github.io/privilege.datastore/">privilege.datastore</a>  | <a href="http://zest.github.io/user.datastore/">user.datastore</a>  | <a href="http://zest.github.io/application.rest/">application.rest</a>  | <a href="http://zest.github.io/integration.embodier/">integration.embodier</a> 
+    </footer>
+</div>
+
+<nav>
+    <h2><a href="index.html">base.gruntrunner</a></h2><h3>Modules</h3><ul><li><a href="module-base-gruntrunner.html">base-gruntrunner</a></li><li><a href="clean.html">tasks/clean</a></li><li><a href="document.html">tasks/document</a></li><li><a href="observe.html">tasks/observe</a></li><li><a href="test.html">tasks/test</a></li></ul><h3>Externals</h3><ul><li><a href="external-grunt-contrib-clean.html">grunt-contrib-clean</a></li><li><a href="external-grunt-contrib-jshint.html">grunt-contrib-jshint</a></li><li><a href="external-grunt-contrib-watch.html">grunt-contrib-watch</a></li><li><a href="external-grunt-gh-pages.html">grunt-gh-pages</a></li><li><a href="external-grunt-jsdoc.html">grunt-jsdoc</a></li><li><a href="external-grunt-mocha-cov.html">grunt-mocha-cov</a></li><li><a href="external-merge.html">merge</a></li><li><a href="external-mocha-term-cov-reporter.html">mocha-term-cov-reporter</a></li><li><a href="external-path.html">path</a></li></ul>
+</nav>
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
