@@ -52,12 +52,14 @@ are created</p>
 <li><code>watch:test</code> for watching test file changes and running <code>test-queue</code> when files change. This task is only
  available if test files exist.</li>
 <li><code>watch:build</code> for watching build file changes and running <code>build-queue</code> when files change</li>
-<li><code>lib-queue</code> which runs the jshint and test scripts for lib files</li>
-<li><code>test-queue</code> which runs the jshint script for lib files and test scripts</li>
+<li><code>lib-queue</code> which runs the jshint and test scripts for lib files. If docs option is set, instead of jshint and
+ test scripts, the documentation script is run.</li>
+<li><code>test-queue</code> which runs the jshint script for lib files and test scripts. If the test files do not exist, this
+ script is not generated.</li>
 <li><code>build-queue</code> which runs the jshint and test scripts for build files</li>
-<li><code>watch</code></li>
-<li><code>observe</code></li>
-<li><code>deafault</code></li>
+<li><code>watch</code> watches for lib, test and script changes together</li>
+<li><code>observe</code> runs the initial list of tasks and starts the watch</li>
+<li><code>deafault</code> is an alias for observe</li>
 </ul>
     </div>
     
@@ -162,7 +164,7 @@ are created</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="observe.js.html">tasks/observe.js</a>, <a href="observe.js.html#line27">line 27</a>
+        <a href="observe.js.html">tasks/observe.js</a>, <a href="observe.js.html#line29">line 29</a>
     </li></ul></dd>
     
     
